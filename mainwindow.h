@@ -36,8 +36,8 @@ public:
     friend class MainWindow;
     paintWidget(QMainWindow* parent = 0);
     Node map[xlen+10][ylen+10]; //游戏地图
-    bool gamestart;
-    QTimer *timer;
+    bool gamestart;//游戏是否开始的标志
+    QTimer *timer;//计时变量
 
 private:
     void paintEvent(QPaintEvent*);
