@@ -64,17 +64,21 @@ paintWidget::paintWidget(QMainWindow* parent)
     this->setFocusPolicy(Qt::StrongFocus);//设置接受焦点的方式
 }
 
+//绘制游戏整体界面
 void paintWidget::paintEvent(QPaintEvent*)
 {
     paint = new QPainter;
     paint->begin(this);
     paint->setBrush(QBrush(Qt::black, Qt::SolidPattern));
+    //绘制边界
     for(int i = 0; i < border.length(); i++)
         paint->drawRect(border[i]->x*xysize, border[i]->y*xysize, xysize, xysize);
     paint->setBrush(QBrush(Qt::green, Qt::SolidPattern));
+    //绘制蛇
     for(int i = 0; i < snake.length(); i++)
         paint->drawRect(snake[i]->x*xysize, snake[i]->y*xysize, xysize, xysize);
     paint->setBrush((QBrush(Qt::red, Qt::SolidPattern)));
+    //随机生成食物
     for(int i = 0; i < food.length(); i++)
         paint->drawEllipse(food[i]->x*xysize, food[i]->y*xysize, xysize, xysize);
     paint->end();
