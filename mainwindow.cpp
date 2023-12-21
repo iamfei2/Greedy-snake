@@ -48,7 +48,7 @@ void paintWidget::init() {
     }
     for(int i = 0; i < snakelen; i++) {
         snake.append(&map[i+snakex][snakey]);
-        map[i+snakex][snakey].type = snake_label;//设置snake
+        map[i+snakex][snakey].type = snake_label;//设置蛇
     }
 }
 
