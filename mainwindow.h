@@ -10,13 +10,13 @@
 #define ylen 40
 #define xysize 15
 
-//包含每一个节点的横纵坐标和类型
+//包含每一个节点的横坐标和纵坐标和类型
 struct Node {
     int x;
     int y;
     int type;//结点类型
 };
-//Label包含空、障碍物、蛇、果实信息
+//Label包含空、障碍物、蛇和果实信息
 enum Label {
     empty_lable,
     border_lable,
@@ -53,8 +53,8 @@ private:
     int score;
     int roadLen;
 
-    Node* head;//蛇头
-    Node* tail;//蛇尾
+    Node* head;//蛇的头
+    Node* tail;//蛇的尾
 
 signals:
     void restared();
