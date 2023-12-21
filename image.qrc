@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+//获取游戏资源图片
         <file>image/start.ico</file>
         <file>image/pause.ico</file>
         <file>image/continue.ico</file>
