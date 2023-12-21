@@ -210,7 +210,7 @@ void paintWidget::createFood() {
 void paintWidget::moveSnake() {
 
     roadLen++;
-    getHeadTail();//获取🐍的头尾
+    getHeadTail();//获取蛇的头尾
     Node temp = map[(head->x)+dx][(head->y)+dy];
     if(bonus == 0) {
         snake.removeFirst();
