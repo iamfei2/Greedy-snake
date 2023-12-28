@@ -1,8 +1,6 @@
 QT       += core gui
-QT += multimedia
-QT += multimediawidgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -18,12 +16,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp \
-    snake.cpp
+    mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h \
-    snake.h
+    mainwindow.h
 
 FORMS += \
     mainwindow.ui

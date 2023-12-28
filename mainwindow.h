@@ -5,8 +5,6 @@
 #include <QTimer>
 #include <QLabel>
 #include <QPainter>
-#include <QMediaPlayer>
-
 
 #define xlen 40
 #define ylen 40
@@ -16,9 +14,8 @@
 struct Node {
     int x;
     int y;
-    int type;
+    int type;//结点类型
 };
-
 //Label包含空、障碍物、蛇、果实信息
 enum Label {
     empty_lable,
@@ -41,8 +38,6 @@ public:
     Node map[xlen+10][ylen+10]; //游戏地图
     bool gamestart;
     QTimer *timer;
-    QMediaPlayer *player = nullptr;
-    QAudioOutput *audioOutput = nullptr;
 
 private:
     void paintEvent(QPaintEvent*);

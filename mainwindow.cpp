@@ -15,6 +15,7 @@
 #include <QIODevice>
 #include <QFileDialog>
 
+
 //初始化paintWidget
 void paintWidget::init() {
 
@@ -28,8 +29,6 @@ void paintWidget::init() {
     border.clear();
     food.clear();
     gamestart = false;
-
-
 
     int snakelen = 2;  //蛇的初始长度
     int snakex = 5;
@@ -63,13 +62,6 @@ paintWidget::paintWidget(QMainWindow* parent)
     timer=new QTimer;
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(snakeMoveSlot()));//超时时发出信号
     this->setFocusPolicy(Qt::StrongFocus);//设置接受焦点的方式
-
-    player = new QMediaPlayer(this);
-//    audioOutput = new QAudioOutput(this);
-    player->setAudioOutput(audioOutput);
-//    audioOutput->setVolume(0.5);  //调节音频音量
-    player->setSource(QUrl::fromLocalFile("D:\\professional course\\final\\feng.mp3"));
-    player->play();
 }
 
 void paintWidget::paintEvent(QPaintEvent*)
@@ -106,37 +98,7 @@ void paintWidget::mousePressEvent(QMouseEvent *event) {
                 border.append(&map[temp_x][temp_y]);//添加障碍
             }
             update();
-        case Qt::NoButton:
-        case Qt::RightButton:
-        case Qt::MiddleButton:
-        case Qt::BackButton:
-        case Qt::ForwardButton:
-        case Qt::TaskButton:
-        case Qt::ExtraButton4:
-        case Qt::ExtraButton5:
-        case Qt::ExtraButton6:
-        case Qt::ExtraButton7:
-        case Qt::ExtraButton8:
-        case Qt::ExtraButton9:
-        case Qt::ExtraButton10:
-        case Qt::ExtraButton11:
-        case Qt::ExtraButton12:
-        case Qt::ExtraButton13:
-        case Qt::ExtraButton14:
-        case Qt::ExtraButton15:
-        case Qt::ExtraButton16:
-        case Qt::ExtraButton17:
-        case Qt::ExtraButton18:
-        case Qt::ExtraButton19:
-        case Qt::ExtraButton20:
-        case Qt::ExtraButton21:
-        case Qt::ExtraButton22:
-        case Qt::ExtraButton23:
-        case Qt::ExtraButton24:
-        case Qt::AllButtons:
-        case Qt::MouseButtonMask:
-            break;
-        }
+    }
 }
 
 //键盘敲击事件
@@ -145,16 +107,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
     case Qt::Key_Space:
         if(gamewidget->gamestart)
-        {
             pauseGameSlot();
-
-        }
-
         else
-        {
             continueGameSlot();
-
-        }
         break;
     default:
         break;
@@ -263,12 +218,12 @@ void paintWidget::moveSnake() {
     }
     else
         bonus--;
-    if(temp.type == border_lable || temp.type == snake_label)
+    if(temp.type == border_lable || temp.type == snake_label)//设置为蛇地块
         gameOver();
     else {
         snake.append(&map[(head->x)+dx][(head->y)+dy]);
         if(temp.type == food_label) {
-            map[(head->x)+dx][(head->y)+dy].type = empty_lable;
+            map[(head->x)+dx][(head->y)+dy].type = empty_lable;//设置为空地块
             score++;
             food.removeFirst();
             bonus += 3;
@@ -284,7 +239,6 @@ void paintWidget::moveSnake() {
 void paintWidget::gameOver() {
     gamestart = false;
     timer->stop();
-    player->stop();
     int ret=QMessageBox::information(this, "提示", "游戏结束.\n您想再试一次吗?","确认","取消并退出");
     qDebug()<<ret;
     if(ret==0){
@@ -423,7 +377,6 @@ void paintWidget::startGameSlot() {
     gamestart = true;
     createFood();
     timer->start(150);
-    player->play();
 }
 
 void paintWidget::continueGameSlot() {
