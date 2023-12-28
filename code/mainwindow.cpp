@@ -19,7 +19,7 @@
 //初始化paintWidget
 void paintWidget::init() {
 
-    //数值初始化
+    //数值初始化，确定蛇的初始坐标
     head = tail = &map[0][0];
     bonus = 0;
     dx = 1;
@@ -37,7 +37,7 @@ void paintWidget::init() {
     int snakex = 5;
     int snakey = 5;
 
-    //边缘坐标的设定
+    //边缘坐标的设定，确定地图上所有点
     for(int i = 0; i < xlen; i++) {
         for(int j = 0; j < ylen; j++) {
             map[i][j].x = i;
@@ -96,7 +96,7 @@ void paintWidget::paintEvent(QPaintEvent*)
 }
 
 
-//得头尾坐标，用于判断吃果实等
+//获取头和尾的坐标，用于判断吃果实等
 void paintWidget::getHeadTail() {
     head = snake.at(snake.length() - 1);
     tail = snake.at(0);
@@ -110,7 +110,7 @@ void paintWidget::mousePressEvent(QMouseEvent *event) {
     switch (event->button()) {
         case Qt::LeftButton:
             if(!gamestart) {
-                QPoint mouse = event->pos();//鼠标位置
+                QPoint mouse = event->pos();//获取鼠标位置
                 int temp_x = (mouse.x()) / 15;
                 int temp_y = (mouse.y()) / 15;
                 map[temp_x][temp_y].type = border_lable;//设置障碍物
@@ -236,11 +236,11 @@ void paintWidget::createFood() {
 
 
 
-//贪吃蛇移动，本质是坐标结点标签得设定
+//贪吃蛇移动，本质是坐标结点标签的设定
 void paintWidget::moveSnake() {
 
     roadLen++;
-    getHeadTail();//获取🐍的头尾
+    getHeadTail();//获取蛇的头尾坐标
     Node temp = map[(head->x)+dx][(head->y)+dy];
     if(bonus == 0) {
         snake.removeFirst();
@@ -248,7 +248,7 @@ void paintWidget::moveSnake() {
     }
     else
         bonus--;
-    //判断死亡
+    //判断蛇是否死亡
     if(temp.type == border_lable || temp.type == snake_label)
         gameOver();
     //判断是移动还是吃食物得分
