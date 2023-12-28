@@ -31,6 +31,7 @@ void Snake::drawSnake(int x, int y){
     for(int i = 0; i < snake.length(); i++)
         paint->drawRect(snake[i]->x*xysize, snake[i]->y*xysize, xysize, xysize);
 
+    //用画笔画
     paint->setBrush(QBrush(Qt::green, Qt::SolidPattern));
     paint->drawRect(x*xysize, y*xysize, xysize, xysize);
     paint->end();
