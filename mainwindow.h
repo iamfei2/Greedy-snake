@@ -5,18 +5,21 @@
 #include <QTimer>
 #include <QLabel>
 #include <QPainter>
+#include <QMediaPlayer>
+
 
 #define xlen 40
 #define ylen 40
 #define xysize 15
 
-//包含每一个节点的横坐标和纵坐标和类型
+//包含每一个节点的横纵坐标和类型
 struct Node {
     int x;
     int y;
-    int type;//结点类型
+    int type;
 };
-//Label包含空、障碍物、蛇和果实信息
+
+//Label包含空、障碍物、蛇、果实信息
 enum Label {
     empty_lable,
     border_lable,
@@ -36,8 +39,10 @@ public:
     friend class MainWindow;
     paintWidget(QMainWindow* parent = 0);
     Node map[xlen+10][ylen+10]; //游戏地图
-    bool gamestart;//游戏是否开始的标志
-    QTimer *timer;//计时变量
+    bool gamestart;
+    QTimer *timer;
+    QMediaPlayer *player = nullptr;
+    QAudioOutput *audioOutput = nullptr;
 
 private:
     void paintEvent(QPaintEvent*);
@@ -53,8 +58,8 @@ private:
     int score;
     int roadLen;
 
-    Node* head;//蛇的头
-    Node* tail;//蛇的尾
+    Node* head;//蛇头
+    Node* tail;//蛇尾
 
 signals:
     void restared();
